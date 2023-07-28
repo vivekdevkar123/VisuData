@@ -26,9 +26,9 @@ jobs:
       #   run: |
       #     python manage.py test
 
-      - name: Build and collect static files
-        run: |
-          python manage.py collectstatic --noinput
+      # - name: Build and collect static files
+      #   run: |
+      #     python manage.py collectstatic --noinput
 
       - name: Display Job Status
         run: |
