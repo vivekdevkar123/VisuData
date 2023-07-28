@@ -30,11 +30,6 @@ jobs:
         run: |
           python manage.py collectstatic --noinput
 
-      - name: Run code quality checks
-        run: |
-          # Add your code quality check commands here
-          # For example: linters, static analysis tools, etc.
-
       - name: Display Job Status
         run: |
           echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
