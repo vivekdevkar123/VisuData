@@ -1,4 +1,4 @@
-name: CI CD Pipeline For project
+name: Project CI/CD Pipeline
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
@@ -29,6 +29,14 @@ jobs:
       # - name: Build and collect static files
       #   run: |
       #     python manage.py collectstatic --noinput
+
+      - name: Build and Run Django with Docker
+        run: |
+          # Build the Docker image with the provided Dockerfile
+          docker build -t app .
+
+          # Run the Django application using docker-compose
+          docker-compose up -d
 
       - name: Display Job Status
         run: |
