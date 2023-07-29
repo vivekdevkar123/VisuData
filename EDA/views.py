@@ -25,3 +25,12 @@ def FileUpload(request):
 
 
     return render(request, 'analysis/upload-file.html')
+
+
+@login_required(login_url='login')
+def History(request):
+    datasets = Dataset.objects.filter(user = request.user)[::-1]
+    context = {
+        'datasets':datasets,
+    }
+    return render(request, 'analysis/history.html',context)
