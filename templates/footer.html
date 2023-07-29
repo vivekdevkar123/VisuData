@@ -1,0 +1,341 @@
+<Footer>
+    <style type="text/css">
+        #main-nav .sub-nav-wrapper {
+            float: none;
+            display: inline-block;
+        }
+
+        #main-nav>div {
+            text-align: center;
+            width: auto;
+        }
+
+        #main-nav .sub-nav {
+            text-align: left;
+        }
+
+        .megaFooter {
+            border-top: 1px dashed #999;
+            display: flex;
+            text-align: center;
+            position: relative;
+            width: 100%;
+            margin-top: 30px;
+            padding: 20px 0;
+            background-color: #4e565f;
+        }
+
+        .megaFooter .mobile-menu {
+            background-color: #4e565f;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .megaFooter .mobile-menu ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+
+        .megaFooter ul {
+            margin: 20px 30px;
+            display: inline-block;
+        }
+
+        .megaFooter .mobile-menu li:first-child {
+            margin-top: 20px;
+        }
+
+        .megaFooter .mobile-menu li {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            letter-spacing: 1.5px;
+            margin: 10px 15px;
+            padding: 8px 0;
+            text-align: center;
+        }
+
+        .megaFooter .mobile-menu li:last-child {
+            margin-bottom: 0;
+        }
+
+        .megaFooter .mobile-menu a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        #FooterColumn1,
+        #FooterColumn2,
+        #FooterColumn3 {
+            float: left;
+            display: block;
+            line-height: 20px;
+            padding-right: 25px;
+            width: 180px;
+        }
+
+        #FooterColumn4 {
+            float: left;
+            display: block;
+            line-height: 20px;
+            padding-left: 60px;
+            width: 120px;
+        }
+
+        #FooterColumn5 {
+            float: right;
+            display: block;
+            line-height: 20px;
+            width: 142px;
+        }
+
+        .footerHover {
+            vertical-align: top;
+            display: inline-block;
+            list-style-type: none;
+        }
+
+        .footerHover a,
+        .manageCard {
+            font-family: "sofia-pro" !important;
+            color: #fff;
+            font-size: 15px;
+            line-height: 13px;
+            letter-spacing: 1px;
+            line-height: normal;
+            text-decoration: none;
+            padding-right: 4px;
+        }
+
+        /* .footerHover a:hover {
+            opacity: .5;
+        } */
+
+        .pipeFooter {
+            padding: 0;
+            height: 13px;
+            font-family: "sofia-pro", sans-serif !important;
+        }
+
+        .megaFooter li {
+            text-align: left;
+            margin: 4px 0;
+        }
+
+        .MicroFooter {
+            border-top: 1px dashed #c1bebb;
+            color: white;
+            text-align: center;
+            width: 100%;
+            background-color: #4e565f;
+            margin: 0 auto;
+        }
+
+        .MicroFooter li {
+            display: inline-block;
+            text-align: center;
+            letter-spacing: 1px;
+            font-size: 15px;
+            padding-left: 4px;
+            position: relative;
+        }
+
+        .MicroFooter li::after {
+            content: "|";
+            position: absolute;
+            right: -4px;
+            bottom: 0;
+        }
+
+        .MicroFooter li:first-child::after,
+        .MicroFooter li:last-child::after {
+            content: "";
+        }
+
+        .gift-card .intro .column .egc {
+            background: #fff;
+        }
+
+        .gift-card .intro .column .gc {
+            background: #fff;
+        }
+
+        .megaFooter .footerHover {
+            font-size: 15px;
+        }
+
+        .megaFooter>.footerHover {
+            margin: 0;
+            padding-left: 15px;
+        }
+
+        .MicroFooter .footerHover {
+            padding: 0;
+        }
+
+        @media screen and (max-width:767px) {
+            .hidden-sm {
+                display: none !important;
+            }
+
+            .MicroFooter {
+                border: 0 none;
+            }
+
+            .MicroFooter li::after {
+                content: ".";
+                right: -2px;
+            }
+
+            .MicroFooter .footerHover {
+                padding: 0;
+                /* margin: 0 15px 40px; */
+            }
+
+            .footerHover a {
+                padding-right: 6px;
+            }
+
+            .MicroFooter .footerHover li:first-child {
+                display: block;
+                margin: 30px auto;
+            }
+
+            .MicroFooter li.pipeFooter {
+                display: none
+            }
+
+            .megaFooter {
+                border: 0 none;
+                background-color: white;
+                padding: 0;
+            }
+        }
+
+        @media screen and (min-width:768px) {
+            .hidden-md {
+                display: none;
+            }
+        }
+
+        .info {
+            color: rgba(255, 255, 255, 0.75);
+            margin: 20px 0;
+            text-transform: capitalize;
+        }
+
+        .comany-info {
+            display: block;
+            text-align: left;
+        }
+    </style>
+    {% load static %}
+    <div class="megaFooter row">
+
+        <ul class="footerHover hidden-sm col-sm-3">
+            <img src="{% static 'logo.png' %}" class="logo" alt="" style="height: 160px;">
+        </ul>
+
+
+        <ul class="footerHover hidden-sm  col-sm-3">
+            <li>
+                <a href="" data-slnm-id="footerCustomerService" style="font-size: 1.2rem; margin-bottom: 10px;">CUSTOMER
+                    SERVICE</a>
+            </li>
+
+            <li>
+                <a href="/profile/order" data-slnm-id="trackOrder">Track Your Order</a>
+            </li>
+            <li>
+                <a href="/returns" data-slnm-id="returnsExchanges">Returns &amp; Exchanges</a>
+            </li>
+            <li>
+                <a href="/shipping" data-slnm-id="shippingInformation">Shipping Information</a>
+            </li>
+            <li>
+                <a href="/sizing/fit" data-slnm-id="sizeGuide">Size Guide</a>
+            </li>
+            <li>
+                <a href="/contactUs" data-slnm-id="contactUs">Contact Us</a>
+            </li>
+            <li>
+                <a href="/ads" data-slnm-id="aboutAds">About Our Ads</a>
+            </li>
+        </ul>
+
+
+        <ul class="footerHover hidden-sm  col-sm-3">
+            <li>
+                <a href="http://www.anninc.com" data-slnm-id="ourCompany"
+                    style="font-size: 1.2rem; margin-bottom: 10px;">OUR BRANCHES</a>
+            </li>
+            <li>
+                <a target="_blank" href="http://www.anninc.com/" data-slnm-id="corporate">Corporate</a>
+            </li>
+            <li>
+                <a target="_blank" href="/aboutUs" data-slnm-id="aboutAnnTaylorFactory">About Ann Taylor Factory</a>
+            </li>
+            <li>
+                <a target="_blank" href="https://www.anncareers.com/anntaylor" data-slnm-id="careers">Careers</a>
+            </li>
+            <li>
+                <a target="_blank" href="http://www.anncares.com/" data-slnm-id="annCares">Ann Cares</a>
+            </li>
+            <li>
+                <a target="_blank" href="https://www.anntaylor.com" data-slnm-id="annTaylor">Ann Taylor</a>
+            </li>
+            <li>
+                <a target="_blank" href="https://www.loft.com" data-slnm-id="loft">LOFT</a>
+            </li>
+        </ul>
+
+        <ul class="footerHover hidden-sm col-sm-3">
+            <li class="x-mobile-hidden">
+                <a href="/stores" rev="footer:STORE LOCATOR" class="store-locator-link" data-slnm-id="storeLocator"
+                    style="font-size: 1.2rem; margin-bottom: 10px;">
+                    COMPANY NAME
+                </a>
+            </li>
+            <div class="comany-info">
+                <p class="info">Lorem ipsum, dolorci illum nemo aperiam sed, et accusamus ut quasi placeat omnis, itaque
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, iure? Quasi soluta perspiciatis
+                    odio.
+                    Quae assumenda officiis, delectus fugiat doloribus animi consequuntur mollitia labore numquam! Iusto
+                    exercitationem ullam provident inventore harum?</p>
+                <p class="info">support emails - help@clothing.com, customersupport@clothing.com</p>
+                <p class="info">telephone - 1800000001</p>
+            </div>
+
+        </ul>
+
+    </div>
+    <div class="MicroFooter">
+        <ul class="footerHover">
+            <li class="RightFloatClass">©2017 Ann Inc. All Rights Reserved.</li>
+            <li>
+                <a href="/privacy" data-slnm-id="privacyPolicy">Privacy Policy</a>
+            </li>
+            <li>
+                <a href="/californiaPrivacy" data-slnm-id="californiaPolicy">California Privacy</a>
+            </li>
+            <li>
+                <a href="/termsOfUse" data-slnm-id="termsOfUse">Terms of Use</a>
+            </li>
+            <li>
+                <a href="/siteMap" data-slnm-id="siteMap">Site Map</a>
+            </li>
+            <li>
+                <a href="http://www.responsiblyann.com/" data-slnm-id="responsibilityAnn">Responsibly Ann</a>
+            </li>
+            <li>
+                <a href="http://responsiblyann.com/californiaTransparency.asp"
+                    data-slnm-id="californiaTransparency">California Transparency</a>
+            </li>
+            <li>
+                <a rel="external" href="http://ascenaretail.com/investors.jsp" data-slnm-id="investors">Investors</a>
+            </li>
+        </ul>
+    </div>
+</Footer>
