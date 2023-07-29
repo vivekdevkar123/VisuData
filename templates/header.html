@@ -1,0 +1,156 @@
+{% load static %}
+
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'roboto', sans-serif;
+    }
+
+    .navbar {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #edfffa;
+        z-index: 9;
+    }
+
+    .nav {
+        padding: 10px 10vw;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .brand-logo {
+        height: 60px;
+    }
+
+    .nav-items {
+        display: flex;
+        align-items: center;
+    }
+
+    .search {
+        width: 500px;
+        display: flex;
+    }
+
+    .search-box {
+        width: 80%;
+        height: 40px;
+        padding: 10px;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border: 1px solid #d1d1d1;
+        text-transform: capitalize;
+        background: none;
+        color: #a9a9a9;
+        outline: none;
+    }
+
+    .search-btn {
+        width: 20%;
+        height: 40px;
+        padding: 10px 20px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        background: #383838;
+        color: #fff;
+        text-transform: capitalize;
+        font-size: 15px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    .search-box::placeholder {
+        color: #a9a9a9;
+    }
+
+    .nav-items a {
+        margin-left: 20px;
+    }
+
+    .nav-items a img {
+        width: 30px;
+    }
+
+    .links-container {
+        width: 100%;
+        display: flex;
+        padding: 10px 10vw;
+        justify-content: center;
+        list-style: none;
+        border-top: 1px solid #d1d1d1;
+    }
+
+    .link {
+        text-transform: capitalize;
+        padding: 0 10px;
+        margin: 0 5px;
+        text-decoration: none;
+        color: #383838;
+        opacity: 0.5;
+        transition: .5s;
+    }
+
+    .link:hover {
+        opacity: 1;
+    }
+</style>
+
+
+
+<nav class="navbar">
+    <div class="nav" style="display: flex; margin: auto;">
+        <div class="logo mx-3" style="float: left;">
+            <img src="{% static 'logo.png' %}" class="brand-logo" alt="">
+        </div>
+
+        <div class="nav-items" style="float: right;">
+
+
+            <form role="search" method="get" action="/search">
+                <div class="search">
+                    <input type="search" class="search-box" placeholder="search brand, product" aria-label="Search"
+                        name="query" id="query">
+                    <button class="search-btn" type="submit">search</button>
+                </div>
+            </form>
+
+
+
+            {% if user.is_authenticated %}
+
+            <a href="/profile"><img src="{% static 'img/user.png' %}" alt=""></a>
+
+            {% else %}
+
+            <li class="link-item"><a href="/users/signup" class="link"
+                    style="font-size: medium; font-weight: bold;">Sign Up</a></li>
+            <li class="link-item"><a href="/users/login" class="link"
+                    style="font-size: medium; font-weight: bolder;">Log
+                    In</a></li>
+
+            {% endif %}
+
+        </div>
+    </div>
+
+    <ul class="links-container">
+        <li class="link-item"><a href="/" class="link">Home</a></li>
+        <li class="link-item"><a href="/about" class="link">About Us</a></li>
+        <li class="link-item"><a href="/contact" class="link">Contact Us</a></li>
+        <li class="link-item"><a href="/order" class="link">My Order</a></li>
+
+        {% if user.is_authenticated %}
+        <li class="link-item"><a href="users/logout" class="link">Log Out</a></li>
+
+        {% else %}
+        <li class="link-item"><a href="" class="link"> none</a></li>
+        {% endif %}
+    </ul>
+</nav>

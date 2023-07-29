@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+</head>
+
+<body>
+    <main>
+        <div class="box">
+            <div class="inner-box">
+                <div class="forms-wrap">
+
+                    <form action="/users/login/" method="post" class="sign-in-form">
+                        {% csrf_token %}
+
+
+                        <div class="logo">
+                            <img src="{% static 'logo.png' %}" alt="easyclass" />
+                            <h4>MY-SHOP</h4>
+                        </div>
+
+                        <div class="heading">
+                            <h2>Welcome Back</h2>
+                            <h6>Not registred yet?</h6>
+                            <a href="/users/signup" class="toggle">Sign up</a>
+                        </div>
+
+                        <div class="actual-form">
+
+                            <div class="input-wrap">
+                                <input type="text" name="username" class="input-field" required />
+                                <label>Enter Username or email</label>
+                            </div>
+
+                            <div class="input-wrap">
+                                <input type="password" name="password" class="input-field" required />
+                                <label>Enter Your Password</label>
+                            </div>
+
+                            <button type="submit" class="sign-btn">Sign In</button>
+
+                            <p class="text">
+                                Forgotten your password or you login datails?
+                                <a href="#">Get help</a> signing in
+                            </p>
+                        </div>
+
+
+                    </form>
+
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>{{ message.tags|title }}:</strong> {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+
+                </div>
+
+                <div class="carousel">
+                    <div class="images-wrapper">
+                        <img src="{% static 'img/header_back.png' %}" class="image img-1 show" alt="" />
+                        <img src="{% static 'img/header_back.png' %}" class="image img-2" alt="" />
+                    </div>
+
+                    <div class="text-slider">
+                        <div class="text-wrap">
+                            <div class="text-group">
+                                <h2>Let's Go . . .</h2>
+
+                                <h2>Grow rich with us . . .</h2>
+                            </div>
+                        </div>
+
+                        <div class="bullets">
+                            <span class="active" data-value="1"></span>
+
+                            <span data-value="2"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Javascript file -->
+
+    <script src="{% static 'js/accounts.js' %}"></script>
+
+</body>
+
+</html>
