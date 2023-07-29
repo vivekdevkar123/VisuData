@@ -18,14 +18,14 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="mb-3 m-5">
-        <label for="dataset_name" class="form-label">Dataset Name</label>
+        <label for="dataset_name" class="form-label">Title For Dataset</label>
         <input type="text" class="form-control" id="dataset_name" name="dataset_name" required>
     </div>
     <div class="mb-3 m-5">
         <label for="uploaded_file" class="form-label">Upload your Dataset here</label>
         <input type="file" class="form-control" id="uploaded_file" name="uploaded_file" required>
     </div>
-    <button type="submit" class="btn btn-primary">Upload</button>
+    <button type="submit" class="btn btn-primary mx-5">Upload File</button>
 </form>
 
 
