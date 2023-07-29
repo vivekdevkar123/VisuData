@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %} Welcome {% endblock %}
+
+
+{% block css %}
+
+<style>
+
+</style>
+
+{%endblock%}
+
+{% block content %}
+
+<h1>this data analysis page</h1>
+
+
+<div class="head m-3">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                {% for column in head.columns %}
+                <th scope="col">{{ column }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for row in head.iterrows %}
+            <tr>
+                {% for value in row.1 %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+
+
+{% endblock %}
+
+
+{% block js %}
+
+
+
+{% endblock %}

@@ -2,7 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import Dataset
 from django.http import HttpResponse
-
+import pandas as pd
+import numpy as np
 # Create your views here.
 
 @login_required(login_url='login')
@@ -21,7 +22,7 @@ def FileUpload(request):
         if dataset_name and uploaded_file:
             dataset = Dataset(user=user, dataset_name=dataset_name, uploaded_file=uploaded_file)
             dataset.save()
-            return redirect('home') 
+            return redirect('history') 
 
 
     return render(request, 'analysis/upload-file.html')
@@ -34,3 +35,25 @@ def History(request):
         'datasets':datasets,
     }
     return render(request, 'analysis/history.html',context)
+
+@login_required(login_url='login')
+def Delete_Record(request,id):
+    dataset = Dataset.objects.get(dataset_id = id)
+
+    dataset.delete()
+
+    return redirect('history')
+
+@login_required(login_url='login')
+def Analysis(request,id):
+    dataset = Dataset.objects.get(dataset_id = id)
+
+    df = pd.read_csv(dataset.uploaded_file)
+    row, col = df.shape 
+
+    head = df.head()
+
+    context = {
+        'head':head,
+    }
+    return render(request,'analysis/dataAnalysis.html',context)

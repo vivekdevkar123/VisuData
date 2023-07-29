@@ -42,11 +42,14 @@
             </div>
 
             <div class="col-md-4 d-flex my-4">
-                <button type="button" class="btn btn-outline-success" style="width: 10vw; height: max-content;">View
-                    Details</button>
-                <button type="button" class="btn btn-outline-danger"
-                    style="width: 10vw; margin-left: 10px; margin-right: 20px; height: max-content;">Delete
-                    Record</button>
+
+                <a href="/data/{{data.dataset_id}}"><button type="button" class="btn btn-outline-success"
+                        style="width: 9vw; height: max-content;">View Details</button></a>
+
+                <a href="/data/del/{{data.dataset_id}}"><button type="button" class="btn btn-outline-danger"
+                        style="width: 9vw; margin-left: 10px; margin-right: 30px; height: max-content;">Delete
+                        Record</button></a>
+
             </div>
         </div>
     </div>
