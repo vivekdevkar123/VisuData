@@ -3,9 +3,6 @@ from django.shortcuts import render, redirect
 from .models import Dataset
 from django.http import HttpResponse
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sb
 
 # Create your views here.
 
