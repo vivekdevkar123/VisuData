@@ -7,17 +7,29 @@
 {% block css %}
 
 <style>
+    .order-successful-text {
+        font-family: Oswald;
+        font-size: 2.25em;
+        font-weight: bold;
+        color: #444444;
+        text-align: center;
+        background-color: #82cbff;
+    }
 
+    .heading {
+        margin-top: 30px;
+    }
 </style>
 
 {%endblock%}
 
 {% block content %}
 
-<h1>this data analysis page</h1>
-
 
 <div class="head m-3">
+    <div class="heading">
+        <p class="order-successful-text"> Preview of the Dataset: First Few Rows </p>
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -29,6 +41,88 @@
         <tbody>
 
             {% for row in head.iterrows %}
+            <tr>
+                {% for value in row.1 %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+
+<div class="info m-3">
+    <div class="heading">
+        <p class="order-successful-text"> DataFrame Information Summary </p>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                {% for column in info.columns %}
+                <th scope="col">{{ column }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for row in info.iterrows %}
+            <tr>
+                {% for value in row.1 %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+
+<div class="info m-3">
+    <div class="heading">
+        <p class="order-successful-text"> DataFrame Descriptive Statistics </p>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                {% for column in desc.columns %}
+                <th scope="col">{{ column }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for row in desc.iterrows %}
+            <tr>
+                {% for value in row.1 %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+
+
+<div class="info m-3">
+    <div class="heading">
+        <p class="order-successful-text"> Null Value Count Summary </p>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                {% for column in Nullval.columns %}
+                <th scope="col">{{ column }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for row in Nullval.iterrows %}
             <tr>
                 {% for value in row.1 %}
                 <td>{{ value }}</td>

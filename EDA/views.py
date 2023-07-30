@@ -4,6 +4,9 @@ from .models import Dataset
 from django.http import HttpResponse
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sb
+
 # Create your views here.
 
 @login_required(login_url='login')
@@ -16,8 +19,8 @@ def FileUpload(request):
         # Check if the file is either an Excel or CSV file
         if uploaded_file:
             file_extension = uploaded_file.name.split('.')[-1].lower()
-            if file_extension not in ['csv', 'xlsx']:
-                return HttpResponse("Invalid file format. Only CSV and Excel files are allowed.")
+            if file_extension not in ['csv']:
+                return HttpResponse("Invalid file format. Only CSV files are allowed.")
 
         if dataset_name and uploaded_file:
             dataset = Dataset(user=user, dataset_name=dataset_name, uploaded_file=uploaded_file)
@@ -46,14 +49,33 @@ def Delete_Record(request,id):
 
 @login_required(login_url='login')
 def Analysis(request,id):
+
     dataset = Dataset.objects.get(dataset_id = id)
 
     df = pd.read_csv(dataset.uploaded_file)
+
     row, col = df.shape 
 
     head = df.head()
 
+    info = pd.DataFrame({
+        'Column': df.columns,
+        'Non-Null Count': df.count(),
+        'Data Type': df.dtypes
+    })
+
+    Nullval = pd.DataFrame({'Column': df.columns, 'Null Count': df.isnull().sum()})
+    Nullval = Nullval[Nullval['Null Count'] > 0]
+
+    desc = df.describe().reset_index()
+
+
+
+
     context = {
         'head':head,
+        'info':info,
+        'desc':desc,
+        'Nullval':Nullval,
     }
     return render(request,'analysis/dataAnalysis.html',context)

@@ -7,12 +7,29 @@
 {% block css %}
 
 <style>
+    .order-successful-text {
+        font-family: Oswald;
+        font-size: 2.25em;
+        font-weight: bold;
+        color: #444444;
+        text-align: center;
+        background-color: #82cbff;
+    }
 
+    .heading {
+        margin-top: 30px;
+    }
 </style>
 
 {%endblock%}
 
 {% block content %}
+
+
+<div class="heading">
+    <p class="order-successful-text"> Upload Your Dataset (format : csv only) </p>
+</div>
+
 
 <!-- upload_dataset.html -->
 <form method="post" enctype="multipart/form-data">
