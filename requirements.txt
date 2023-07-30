@@ -5,7 +5,4 @@ gunicorn==20.1.0
 Pillow==8.4.0
 psycopg2-binary==2.9.5
 sqlparse==0.4.3
-numpy==1.19.5
 pandas==1.1.5
-matplotlib==3.3.4
-seaborn==0.11.2
