@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 from .models import Dataset
 from django.http import HttpResponse
 import pandas as pd
-
+import os
+from django.conf import settings
 # Create your views here.
 
 @login_required(login_url='login')
@@ -36,11 +37,16 @@ def History(request):
     }
     return render(request, 'analysis/history.html',context)
 
+
 @login_required(login_url='login')
 def Delete_Record(request,id):
     dataset = Dataset.objects.get(dataset_id = id)
 
+    file_path = str(dataset.uploaded_file)
+    final_path = os.path.join(settings.MEDIA_ROOT,file_path)
+    os.remove(final_path)
     dataset.delete()
+    
 
     return redirect('history')
 
@@ -48,26 +54,18 @@ def Delete_Record(request,id):
 def Analysis(request,id):
 
     dataset = Dataset.objects.get(dataset_id = id)
-
     df = pd.read_csv(dataset.uploaded_file)
 
     row, col = df.shape 
-
     head = df.head()
-
     info = pd.DataFrame({
         'Column': df.columns,
         'Non-Null Count': df.count(),
         'Data Type': df.dtypes
     })
-
     Nullval = pd.DataFrame({'Column': df.columns, 'Null Count': df.isnull().sum()})
     Nullval = Nullval[Nullval['Null Count'] > 0]
-
     desc = df.describe().reset_index()
-
-
-
 
     context = {
         'head':head,
