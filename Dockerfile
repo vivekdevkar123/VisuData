@@ -1,18 +1,17 @@
-FROM python:3.6-slim
+FROM python:3.9
 
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN mkdir /demo
-
-WORKDIR /demo
-
-ADD . /demo
+WORKDIR /app
 
 COPY requirements.txt .
 
-RUN python -m pip install --upgrade pip
+RUN pip install --upgrade pip
 RUN pip3 install -r requirements.txt
+
+COPY . /app/
 
 EXPOSE 8000
 
-CMD python manage.py runserver 0:8000
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
