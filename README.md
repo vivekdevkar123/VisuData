@@ -68,8 +68,12 @@ Create Docker Image
 Run Container and Start the server
 
 ```bash
-  sudo docker run -p 8000:8000 -v "$(pwd)":/app my_django_app
+  sudo docker-compose up
 ```
+
+Go to the below address to access the website.
+[http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+
 
 
 ## Screenshots
