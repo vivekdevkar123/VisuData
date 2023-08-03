@@ -82,7 +82,7 @@ Go to the below address to access the website.
 
 
 ## 🔗 Links
-[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://katherineoelsner.com/)
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://vivekdevkar123.github.io/Portfolio/)
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vivekdevkar123/)
 [![twitter](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github)](https://github.com/vivekdevkar123)
 
