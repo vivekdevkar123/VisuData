@@ -171,7 +171,7 @@ Unnamed: 0,Age,Gender,Education Level,Job Title,Years of Experience,Salary,Count
 169,34.0,Male,Master's,Senior Software Engineer,9.0,105000.0,China,Korean
 170,50.0,Female,Master's,Director of Finance,20.0,180000.0,Australia,Australian
 171,29.0,Male,Bachelor's,Junior Marketing Coordinator,2.0,40000.0,Canada,Asian
-172,33.62085944494181,,,,8.094687360095508,115326.96477086132,UK,White
+172,33.62085944494181,Male,Bachelor's Degree,Software Engineer,8.094687360095508,115326.96477086132,UK,White
 173,43.0,Male,Bachelor's,Senior Project Manager,16.0,140000.0,UK,White
 174,26.0,Female,Master's,Junior Data Scientist,1.5,45000.0,Canada,Asian
 175,35.0,Male,Bachelor's,Senior Operations Analyst,7.0,85000.0,China,White
@@ -259,7 +259,7 @@ Unnamed: 0,Age,Gender,Education Level,Job Title,Years of Experience,Salary,Count
 257,35.0,Male,Bachelor's,Senior Project Coordinator,9.0,95000.0,UK,Asian
 258,50.0,Female,PhD,Director of Operations,22.0,180000.0,Australia,White
 259,29.0,Male,Bachelor's,Junior Business Operations Analyst,1.5,350.0,USA,Hispanic
-260,33.62085944494181,,,,8.094687360095508,115326.96477086132,Canada,White
+260,33.62085944494181,Male,Bachelor's Degree,Software Engineer,8.094687360095508,115326.96477086132,Canada,White
 261,37.0,Female,Bachelor's,Senior Financial Manager,10.0,120000.0,USA,African American
 262,46.0,Male,PhD,Senior Data Scientist,18.0,160000.0,China,Chinese
 263,31.0,Female,Bachelor's,Junior Marketing Coordinator,3.0,50000.0,Australia,White
@@ -2010,7 +2010,7 @@ Unnamed: 0,Age,Gender,Education Level,Job Title,Years of Experience,Salary,Count
 2008,33.0,Female,Bachelor's Degree,Full Stack Engineer,6.0,115000.0,Australia,White
 2009,45.0,Male,PhD,Senior Project Engineer,16.0,185000.0,UK,Mixed
 2010,29.0,Female,Bachelor's Degree,Front end Developer,4.0,90000.0,China,Korean
-2011,27.0,Male,,Developer,7.0,100000.0,UK,White
+2011,27.0,Male,Bachelor's Degree,Developer,7.0,100000.0,UK,White
 2012,31.0,Female,Bachelor's Degree,Front end Developer,6.0,110000.0,China,Chinese
 2013,37.0,Male,Master's Degree,Software Engineer Manager,10.0,150000.0,Canada,Black
 2014,27.0,Male,Bachelor's Degree,Back end Developer,3.0,80000.0,USA,Hispanic

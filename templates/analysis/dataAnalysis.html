@@ -116,8 +116,16 @@
                 <!-- Your sidebar navigation items go here -->
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                    <li class="nav-item active"><a class="nav-link" href="#"><i class="fa fa-puzzle-piece"></i>
-                            Components</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="appsDropdown" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"><i class="fa fa-diamond"></i> Handle Missing
+                            Values</a>
+                        <div class="dropdown-menu" aria-labelledby="appsDropdown">
+                            <a class="dropdown-item" href="/data/datacleaning/mean/{{my_id}}">Mean Imputation</a>
+                            <a class="dropdown-item" href="/data/datacleaning/median/{{my_id}}">Median Imputation</a>
+                            <a class="dropdown-item" href="/data/datacleaning/mode/{{my_id}}">Mode Imputation</a>
+                        </div>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-heart"></i> Extras</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="appsDropdown" data-toggle="dropdown"
@@ -138,7 +146,7 @@
                         </div>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="#"><span class="glyphicon glyphicon-signal"></span>
-                            Link</a>
+                            Data Visulization</a>
                     </li>
                 </ul>
             </nav>

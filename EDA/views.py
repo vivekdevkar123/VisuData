@@ -5,6 +5,8 @@ from django.http import HttpResponse
 import pandas as pd
 import os
 from django.conf import settings
+from django.contrib import messages
+
 # Create your views here.
 
 @login_required(login_url='login')
@@ -51,12 +53,11 @@ def Delete_Record(request,id):
     return redirect('history')
 
 @login_required(login_url='login')
-def Analysis(request,id):
-
-    dataset = Dataset.objects.get(dataset_id = id)
+def Analysis(request, id):
+    dataset = Dataset.objects.get(dataset_id=id)
     df = pd.read_csv(dataset.uploaded_file)
 
-    row, col = df.shape 
+    row, col = df.shape
     head = df.head()
     info = pd.DataFrame({
         'Column': df.columns,
@@ -68,9 +69,86 @@ def Analysis(request,id):
     desc = df.describe().reset_index()
 
     context = {
-        'head':head,
-        'info':info,
-        'desc':desc,
-        'Nullval':Nullval,
+        'head': head,
+        'info': info,
+        'desc': desc,
+        'Nullval': Nullval,
+        'my_id':id,
     }
-    return render(request,'analysis/dataAnalysis.html',context)
+    return render(request, 'analysis/dataAnalysis.html', context)
+
+
+
+@login_required(login_url='login')
+def mean_imputation(request,id):
+    try:
+        dataset = Dataset.objects.get(dataset_id=id)
+        file_path = dataset.uploaded_file.path
+
+        df = pd.read_csv(file_path)
+
+        for column in df.columns:
+            if df[column].dtype.kind in 'biufc': 
+                if df[column].isnull().any():
+                    mean_value = df[column].mean()
+                    df[column].fillna(mean_value, inplace=True)
+            else:
+                df[column].fillna('NULL', inplace=True)
+
+        df.to_csv(file_path, index=False)
+
+        messages.success(request, "Mean imputation completed successfully for int and float datatype.")
+    except Dataset.DoesNotExist:
+        messages.error(request, "Dataset with the provided ID does not exist.")
+
+    return redirect("data-analysis",id=id)
+
+
+@login_required(login_url='login')
+def median_imputation(request,id):
+
+    dataset = Dataset.objects.get(dataset_id=id)
+    file_path = dataset.uploaded_file.path
+
+    df = pd.read_csv(file_path)
+
+    for column in df.columns:
+        if df[column].dtype.kind in 'biufc':  # Check if column data type is numeric
+            if df[column].isnull().any():
+                median_value = df[column].median()
+                df[column].fillna(median_value, inplace=True)
+        else:
+            # For non-numeric (Object) columns, replace null values with 'NULL'
+            df[column].fillna('NULL', inplace=True)
+
+    # Save the modified DataFrame back to the CSV file in the database
+    df.to_csv(file_path, index=False)
+    messages.success(request, "Median imputation completed successfully for non-numeric datatype.")
+    return redirect("data-analysis",id=id)
+
+@login_required(login_url='login')
+def mode_imputation(request,id):
+
+    dataset = Dataset.objects.get(dataset_id=id)
+    file_path = dataset.uploaded_file.path
+
+    df = pd.read_csv(file_path)
+
+    for column in df.columns:
+        if df[column].dtype.kind not in 'biufc':  # Check if column data type is not numeric (i.e., Object)
+            if df[column].isnull().any():
+                mode_value = df[column].mode()[0]  # Mode may have multiple values, so we take the first one
+                df[column].fillna(mode_value, inplace=True)
+        else:
+            # For numeric columns, replace null values with the median
+            median_value = df[column].median()
+            df[column].fillna(median_value, inplace=True)
+
+    # Save the modified DataFrame back to the CSV file in the database
+    df.to_csv(file_path, index=False)
+
+    # Display a success message for mode imputation
+    messages.success(request, "Mode imputation completed successfully for non-numeric datatype.")
+    return redirect("data-analysis",id=id)
+
+
