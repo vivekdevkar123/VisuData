@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .models import Dataset
+from .models import Dataset,Note
 from django.http import HttpResponse,FileResponse
 import pandas as pd
 import os
@@ -165,3 +165,26 @@ def DownloadDataset(request, id):
     else:
         return HttpResponse("File not found.", status=404)
 
+
+
+@login_required(login_url='login')
+def AddNote(request,id):
+    if request.method == 'POST':
+        dataset = Dataset.objects.get(dataset_id=id)
+        note = request.POST.get('insight')
+        note = Note(user=request.user,dataset=dataset,note = note)
+        note.save()    
+        messages.success(request, "Your Insight Added succesfully!!!")
+        return redirect("data-analysis",id=id)
+
+    return redirect("data-analysis",id=id)
+
+
+@login_required(login_url='login')
+def ViewNote(request,id):
+    dataset = Dataset.objects.get(dataset_id=id)
+    notes = Note.objects.filter(user = request.user,dataset = dataset)
+    data = {
+        'notes':notes,
+    }
+    return redirect("data-analysis",id=id)

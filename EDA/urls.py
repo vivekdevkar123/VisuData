@@ -9,4 +9,6 @@ urlpatterns = [
     path('datacleaning/median/<slug:id>',median_imputation,name='median_imputation_view'),
     path('datacleaning/mode/<slug:id>',mode_imputation,name='mode_imputation_view'),
     path('download/<slug:id>',DownloadDataset,name='DownloadDataset'),
+    path('addnote/<slug:id>',AddNote,name='Add-note'),
+    path('viewnote/<slug:id>',ViewNote,name='View-note'),
 ]
