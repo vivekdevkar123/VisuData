@@ -59,12 +59,6 @@ Go to the project directory
   cd VisuData
 ```
 
-Create Docker Image
-
-```bash
-  sudo docker build -t my_django_app
-```
-
 Run Container and Start the server
 
 ```bash
