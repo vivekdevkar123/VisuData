@@ -53,7 +53,7 @@ Clone the project
   git clone https://github.com/vivekdevkar123/VisuData.git
 ```
 
-Go to the project directory
+Go to the project directory 
 
 ```bash
   cd VisuData
