@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import Dataset
-from django.http import HttpResponse
+from django.http import HttpResponse,FileResponse
 import pandas as pd
 import os
 from django.conf import settings
@@ -74,6 +74,7 @@ def Analysis(request, id):
         'desc': desc,
         'Nullval': Nullval,
         'my_id':id,
+        'title':dataset.dataset_name,
     }
     return render(request, 'analysis/dataAnalysis.html', context)
 
@@ -151,4 +152,16 @@ def mode_imputation(request,id):
     messages.success(request, "Mode imputation completed successfully for non-numeric datatype.")
     return redirect("data-analysis",id=id)
 
+
+@login_required(login_url='login')
+def DownloadDataset(request, id):
+    dataset = Dataset.objects.get(dataset_id=id)
+    file_path = dataset.uploaded_file.path
+
+    if os.path.exists(file_path):
+        response = FileResponse(open(file_path, 'rb'), content_type='application/csv')
+        response['Content-Disposition'] = f'attachment; filename="{os.path.basename(file_path)}"'
+        return response
+    else:
+        return HttpResponse("File not found.", status=404)
 

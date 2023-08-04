@@ -8,4 +8,5 @@ urlpatterns = [
     path('datacleaning/mean/<slug:id>',mean_imputation,name='mean_imputation_view'),
     path('datacleaning/median/<slug:id>',median_imputation,name='median_imputation_view'),
     path('datacleaning/mode/<slug:id>',mode_imputation,name='mode_imputation_view'),
+    path('download/<slug:id>',DownloadDataset,name='DownloadDataset'),
 ]

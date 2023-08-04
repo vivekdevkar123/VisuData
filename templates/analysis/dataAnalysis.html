@@ -12,7 +12,7 @@
         font-size: 1.4em;
         color: #444444;
         text-align: center;
-        background-color: #82cbff;
+        background-color: #e1f0fb;
     }
 
     .heading {
@@ -89,6 +89,55 @@
             margin-left: 0;
         }
     }
+
+    .heading-title-text {
+        font-family: Oswald;
+        font-size: 2.25em;
+        font-weight: bold;
+        color: #444444;
+        text-align: center;
+        background-color: #82cbff;
+    }
+
+    .heading {
+        margin-top: 30px;
+    }
+
+    .h-text {
+        margin: 20px;
+        padding: 20px;
+
+    }
+
+    .h-animate .text {
+        position: relative;
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    .text.sec-text:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #ffff;
+        border-left: 2px solid #00C9F3;
+        animation: animate 4s steps(12) infinite;
+    }
+
+    @keyframes animate {
+
+        40%,
+        60% {
+            left: calc(100% + 4px);
+        }
+
+        100% {
+            left: 0%;
+        }
+    }
 </style>
 
 {%endblock%}
@@ -96,10 +145,17 @@
 {% block content %}
 
 
-<div class="header-text">
-    <h1 class="running-h1">Data Exploration: Uncovering Insights and Patterns</h1>
-</div>
+<div class="h-text">
 
+    <div class="h-animate">
+
+        <span class="text first-text">Data Exploration:&nbsp;</span>
+
+        <span class="text sec-text"></span>
+
+    </div>
+
+</div>
 
 <div class="container-fluid">
 
@@ -145,8 +201,20 @@
                             </div>
                         </div>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="appsDropdown" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"><i class="fa fa-diamond"></i> Notes</a>
+                        <div class="dropdown-menu" aria-labelledby="appsDropdown">
+                            <a class="dropdown-item" href="">Make a Note</a>
+                            <a class="dropdown-item" href="">See All Notes</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="/data/download/{{my_id}}"><span
+                                class="glyphicon glyphicon-signal"></span>
+                            Download Dataset</a>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="#"><span class="glyphicon glyphicon-signal"></span>
-                            Data Visulization</a>
+                            Download Visulization</a>
                     </li>
                 </ul>
             </nav>
@@ -157,6 +225,9 @@
 
 
         <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div class="heading">
+                <p class="heading-title-text"> {{title}} </p>
+            </div>
             <div class="head m-3 table-responsive">
                 <div class="heading">
                     <p class="order-successful-text"> Preview of the Dataset: First Few Rows </p>
@@ -283,6 +354,23 @@
 
 {% block js %}
 
+<script>
+    const text = document.querySelector(".sec-text");
+
+    const textLoad = () => {
+
+        setTimeout(() => {
+
+            text.textContent = "Uncovering Insights and Patterns";
+
+        }, 0);
+
+    }
+
+    textLoad();
+    setInterval(textLoad, 12000);
+
+</script>
 
 
 {% endblock %}
