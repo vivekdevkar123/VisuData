@@ -187,4 +187,6 @@ def ViewNote(request,id):
     data = {
         'notes':notes,
     }
+
+    # this function is not complete
     return redirect("data-analysis",id=id)
