@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .models import Dataset
+from .models import Dataset,Note
 from django.http import HttpResponse,FileResponse
 import pandas as pd
 import os
@@ -56,7 +56,7 @@ def Delete_Record(request,id):
 def Analysis(request, id):
     dataset = Dataset.objects.get(dataset_id=id)
     df = pd.read_csv(dataset.uploaded_file)
-
+    notes = Note.objects.filter(user = request.user,dataset = dataset)
     row, col = df.shape
     head = df.head()
     info = pd.DataFrame({
@@ -75,6 +75,7 @@ def Analysis(request, id):
         'Nullval': Nullval,
         'my_id':id,
         'title':dataset.dataset_name,
+        'notes':notes,
     }
     return render(request, 'analysis/dataAnalysis.html', context)
 
@@ -165,3 +166,27 @@ def DownloadDataset(request, id):
     else:
         return HttpResponse("File not found.", status=404)
 
+
+
+@login_required(login_url='login')
+def AddNote(request,id):
+    if request.method == 'POST':
+        dataset = Dataset.objects.get(dataset_id=id)
+        note = request.POST.get('insight')
+        heading = request.POST.get('heading')
+        note = Note(user=request.user,dataset=dataset,note = note,heading=heading)
+        note.save()    
+        messages.success(request, "Your Insight Added succesfully!!!")
+        return redirect("data-analysis",id=id)
+
+    return redirect("data-analysis",id=id)
+
+
+@login_required(login_url='login')
+def DeleteNote(request,id):
+    note = Note.objects.get(note_id = id)
+    dataset = note.dataset
+    newid = dataset.dataset_id
+    note.delete()
+    messages.success(request, "Your Insight Deleted succesfully!!!")
+    return redirect("data-analysis",id=newid)
