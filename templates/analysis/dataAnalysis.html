@@ -277,7 +277,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">View Insights of Dataset</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -297,6 +297,10 @@
                                 <a href="/data/note/delete/{{note.note_id}}" class="btn-small">Delete</a>
                             </a>
 
+
+                            {% empty %}
+
+                            <p class="mb-1">No insights Found</p>
                             {%endfor%}
                         </div>
                     </div>
