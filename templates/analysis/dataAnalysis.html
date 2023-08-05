@@ -253,12 +253,14 @@
                     <form action="/data/addnote/{{my_id}}" method="post">
                         {% csrf_token %}
                         <div class="modal-body">
+                            <input type="text" name="heading" class="form-control my-2"
+                                placeholder="Enter the heading here...">
                             <textarea name="insight" class="form-control" rows="4"
                                 placeholder="Enter your insight here..."></textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Add</button>
+                            <button type="submit" class="btn btn-success">Add</button>
                         </div>
                     </form>
                 </div>
@@ -281,12 +283,25 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        ...
+
+
+                        <div class="list-group">
+                            {% for note in notes %}
+
+                            <a class="list-group-item list-group-item-action" aria-current="true">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">{{note.heading}}</h5>
+                                    <small>{{note.uploaded_date}}</small>
+                                </div>
+                                <p class="mb-1">{{note.note}}</p>
+                                <a href="/data/note/delete/{{note.note_id}}" class="btn-small">Delete</a>
+                            </a>
+
+                            {%endfor%}
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <a href="/data/viewnote/{{my_id}}">
-                            <button type="button" class="btn btn-success">Refresh</button></a>
                     </div>
                 </div>
             </div>

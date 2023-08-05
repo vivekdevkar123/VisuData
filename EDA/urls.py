@@ -10,5 +10,5 @@ urlpatterns = [
     path('datacleaning/mode/<slug:id>',mode_imputation,name='mode_imputation_view'),
     path('download/<slug:id>',DownloadDataset,name='DownloadDataset'),
     path('addnote/<slug:id>',AddNote,name='Add-note'),
-    path('viewnote/<slug:id>',ViewNote,name='View-note'),
+    path('note/delete/<slug:id>',DeleteNote,name='Delete-note'),
 ]

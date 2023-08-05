@@ -56,7 +56,7 @@ def Delete_Record(request,id):
 def Analysis(request, id):
     dataset = Dataset.objects.get(dataset_id=id)
     df = pd.read_csv(dataset.uploaded_file)
-
+    notes = Note.objects.filter(user = request.user,dataset = dataset)
     row, col = df.shape
     head = df.head()
     info = pd.DataFrame({
@@ -75,6 +75,7 @@ def Analysis(request, id):
         'Nullval': Nullval,
         'my_id':id,
         'title':dataset.dataset_name,
+        'notes':notes,
     }
     return render(request, 'analysis/dataAnalysis.html', context)
 
@@ -172,7 +173,8 @@ def AddNote(request,id):
     if request.method == 'POST':
         dataset = Dataset.objects.get(dataset_id=id)
         note = request.POST.get('insight')
-        note = Note(user=request.user,dataset=dataset,note = note)
+        heading = request.POST.get('heading')
+        note = Note(user=request.user,dataset=dataset,note = note,heading=heading)
         note.save()    
         messages.success(request, "Your Insight Added succesfully!!!")
         return redirect("data-analysis",id=id)
@@ -181,12 +183,10 @@ def AddNote(request,id):
 
 
 @login_required(login_url='login')
-def ViewNote(request,id):
-    dataset = Dataset.objects.get(dataset_id=id)
-    notes = Note.objects.filter(user = request.user,dataset = dataset)
-    data = {
-        'notes':notes,
-    }
-
-    # this function is not complete
-    return redirect("data-analysis",id=id)
+def DeleteNote(request,id):
+    note = Note.objects.get(note_id = id)
+    dataset = note.dataset
+    newid = dataset.dataset_id
+    note.delete()
+    messages.success(request, "Your Insight Deleted succesfully!!!")
+    return redirect("data-analysis",id=newid)
