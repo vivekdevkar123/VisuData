@@ -176,6 +176,9 @@
                 <!-- Your sidebar navigation items go here -->
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/visu/{{my_id}}"><i class="fa fa-dashboard"></i>
+                            Visulizations</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="appsDropdown" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false"><i class="fa fa-diamond"></i> Handle Missing
@@ -466,3 +469,27 @@
 
 
 {% endblock %}
+
+
+<!-- 
+
+
+<script>
+    var data = {{ data | safe }};
+
+    var svg = d3.select("#scatter-plot")
+        .append("svg")
+        .attr("width", 500)
+        .attr("height", 400);
+
+    svg.selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("cx", function (d) { return d.x; })
+        .attr("cy", function (d) { return d.y; })
+        .attr("r", 5);
+</script>
+
+
+-->
