@@ -5,6 +5,8 @@ import json
 import matplotlib.pyplot as plt
 from io import BytesIO, StringIO
 import base64
+from .models import Plot
+from django.contrib import messages
 
 
 def Visulization_Home(request, id):
@@ -13,7 +15,6 @@ def Visulization_Home(request, id):
     
     if plot_image:
         context = {'plot_image': plot_image}
-        del request.session['plot_image']  # Clear the session variable
     else:
         context = {}  # Initialize an empty context if no plot image
     
@@ -66,3 +67,21 @@ def scatter_plot(request, id):
         'column_names': column_names,
     }
     return render(request, 'visulization/index.html', context)
+
+
+def Save_Plot(request, id):
+    plot_image = request.session.get('plot_image', None)
+    dataset = Dataset.objects.get(dataset_id=id)
+    if plot_image:
+        plot = Plot(dataset=dataset, data={'plot_image': plot_image})
+        plot.save()
+        messages.success(request, "Plot saved successfully!!!")
+        del request.session['plot_image']
+        
+    return redirect('Visulization-Home', id=id)
+
+
+def Delete_Plot(request, id):
+    del request.session['plot_image']
+    messages.warning(request, "Plot deleted successfully!!!")
+    return redirect('Visulization-Home', id=id)

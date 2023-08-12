@@ -6,6 +6,7 @@ import pandas as pd
 import os
 from django.conf import settings
 from django.contrib import messages
+from Visulization.models import Plot
 
 # Create your views here.
 
@@ -55,6 +56,7 @@ def Delete_Record(request,id):
 @login_required(login_url='login')
 def Analysis(request, id):
     dataset = Dataset.objects.get(dataset_id=id)
+    plots = Plot.objects.filter(dataset=dataset)
     df = pd.read_csv(dataset.uploaded_file)
     notes = Note.objects.filter(user = request.user,dataset = dataset)
     row, col = df.shape
@@ -76,6 +78,7 @@ def Analysis(request, id):
         'my_id':id,
         'title':dataset.dataset_name,
         'notes':notes,
+        'plots':plots,
     }
     return render(request, 'analysis/dataAnalysis.html', context)
 

@@ -193,7 +193,7 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="appsDropdown" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false"><i class="fa fa-diamond"></i>Visualizations</a>
+                            aria-haspopup="true" aria-expanded="false"><i class="fa fa-diamond"></i>Categorical</a>
                         <div class="dropdown-menu" aria-labelledby="subLevelDropdown">
                             <a class="dropdown-item" href="#">Bar Chart</a>
                             <a class="dropdown-item" href="#">Histogram</a>
@@ -274,12 +274,25 @@
                 <p class="heading-title-text"> {{title}} </p>
             </div>
 
+            <div style="display: flex; justify-content: space-between;">
+                <div class="plot-img">
+                    {% if plot_image %}
+                    <img src="data:image/png;base64,{{ plot_image }}" alt="Scatter Plot">
+                    {% else %}
+                    <p>No plot image available.</p>
+                    {% endif %}
+                </div>
+                <div class="edit-save" style="align-items: center; margin: auto;">
+                    {% if plot_image %}
+                    <a href="/visu/save_plot/{{my_id}}"><button type="button" class="btn btn-outline-success btn-sm"
+                            style="width: 9vw; height: max-content;">Save</button></a>
+                    <br><br>
+                    <a href="/visu/delete_plot/{{my_id}}"><button type="button" class="btn btn-outline-danger btn-sm"
+                            style="width: 9vw; height: max-content;">Delete</button></a>
+                    {%endif%}
+                </div>
+            </div>
 
-            {% if plot_image %}
-            <img src="data:image/png;base64,{{ plot_image }}" alt="Scatter Plot">
-            {% else %}
-            <p>No plot image available.</p>
-            {% endif %}
 
 
 
