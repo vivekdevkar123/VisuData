@@ -69,6 +69,170 @@ def scatter_plot(request, id):
     return render(request, 'visulization/index.html', context)
 
 
+
+
+import seaborn as sns
+
+def line_plot(request, id):
+    dataset = Dataset.objects.get(dataset_id=id)
+    df = pd.read_csv(dataset.uploaded_file.path)
+    column_names = df.columns.tolist()
+    
+    if request.method == 'POST':
+        heading = request.POST.get('line-plot-heading')
+        y_axis_label = request.POST.get('y-axis-label')
+        y_axis_column = request.POST.get('y_axis')
+        line_color = request.POST.get('line_color')
+        
+        plt.figure(figsize=(10, 6))
+        
+        # Use Seaborn's line plot
+        sns.lineplot(data=df, x=df.index, y=y_axis_column, color=line_color)
+        
+        plt.title(heading)
+        plt.ylabel(y_axis_label)
+        
+        buffer = BytesIO()
+        plt.savefig(buffer, format='png')
+        plt.close()
+        
+        plot_image = base64.b64encode(buffer.getvalue()).decode('utf-8')
+        
+        # Save the plot_image to the session to pass it to the home view
+        request.session['plot_image'] = plot_image
+        
+        return redirect('Visulization-Home', id=id)
+    
+    context = {
+        'title': dataset.dataset_name,
+        'my_id': dataset.dataset_id,
+        'column_names': column_names,
+    }
+    return render(request, 'visulization/index.html', context)
+
+
+
+
+
+
+def bar_chart(request, id):
+    dataset = Dataset.objects.get(dataset_id=id)
+    df = pd.read_csv(dataset.uploaded_file.path)
+    column_names = df.columns.tolist()
+    
+    if request.method == 'POST':
+        heading = request.POST.get('bar-chart-heading')
+        x_axis_label = request.POST.get('x-axis-label')
+        y_axis_label = request.POST.get('y-axis-label')
+        x_axis_column = request.POST.get('x_axis')
+        y_axis_column = request.POST.get('y_axis')
+        bar_color = request.POST.get('bar_color')
+        
+        plt.figure(figsize=(10, 6))
+        
+        # Create a bar chart using Matplotlib
+        plt.bar(df[x_axis_column], df[y_axis_column], color=bar_color)
+        plt.title(heading)
+        plt.xlabel(x_axis_label)
+        plt.ylabel(y_axis_label)
+        plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
+        
+        buffer = BytesIO()
+        plt.savefig(buffer, format='png')
+        plt.close()
+        
+        plot_image = base64.b64encode(buffer.getvalue()).decode('utf-8')
+        
+        # Save the plot_image to the session to pass it to the home view
+        request.session['plot_image'] = plot_image
+        
+        return redirect('Visulization-Home', id=id)
+    
+    context = {
+        'title': dataset.dataset_name,
+        'my_id': dataset.dataset_id,
+        'column_names': column_names,
+    }
+    return render(request, 'visulization/index.html', context)
+
+
+
+
+def histogram(request, id):
+    dataset = Dataset.objects.get(dataset_id=id)
+    df = pd.read_csv(dataset.uploaded_file.path)
+    column_names = df.columns.tolist()
+    
+    if request.method == 'POST':
+        heading = request.POST.get('histogram-heading')
+        x_axis_label = request.POST.get('x-axis-label')
+        x_axis_column = request.POST.get('x_axis')
+        histogram_color = request.POST.get('histogram_color')
+        
+        plt.figure(figsize=(10, 6))
+        
+        # Create a histogram using Matplotlib
+        plt.hist(df[x_axis_column], bins='auto', color=histogram_color)
+        plt.title(heading)
+        plt.xlabel(x_axis_label)
+        plt.ylabel('Frequency')
+        
+        buffer = BytesIO()
+        plt.savefig(buffer, format='png')
+        plt.close()
+        
+        plot_image = base64.b64encode(buffer.getvalue()).decode('utf-8')
+        
+        # Save the plot_image to the session to pass it to the home view
+        request.session['plot_image'] = plot_image
+        
+        return redirect('Visulization-Home', id=id)
+    
+    context = {
+        'title': dataset.dataset_name,
+        'my_id': dataset.dataset_id,
+        'column_names': column_names,
+    }
+    return render(request, 'visulization/index.html', context)
+
+
+
+def pie_chart(request, id):
+    dataset = Dataset.objects.get(dataset_id=id)
+    df = pd.read_csv(dataset.uploaded_file.path)
+    numeric_columns = df.select_dtypes(include=['number']).columns.tolist()
+    
+    if request.method == 'POST':
+        heading = request.POST.get('pie-chart-heading')
+        
+        plt.figure(figsize=(8, 8))
+        
+        # Sum the numeric columns and create a pie chart
+        plt.pie(df[numeric_columns].sum(), labels=numeric_columns, autopct='%1.1f%%', startangle=140)
+        plt.title(heading)
+
+        buffer = BytesIO()
+        plt.savefig(buffer, format='png')
+        plt.close()
+
+        plot_image = base64.b64encode(buffer.getvalue()).decode('utf-8')
+
+        # Save the plot_image to the session to pass it to the home view
+        request.session['plot_image'] = plot_image
+
+        return redirect('Visulization-Home', id=id)
+
+    context = {
+        'title': dataset.dataset_name,
+        'my_id': dataset.dataset_id,
+    }
+    return render(request, 'visulization/index.html', context)
+
+
+
+
+
+
 def Save_Plot(request, id):
     plot_image = request.session.get('plot_image', None)
     dataset = Dataset.objects.get(dataset_id=id)
