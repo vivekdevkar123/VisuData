@@ -405,10 +405,7 @@
 
 
             {% if Nullval.empty %}
-            <div class="heading">
-                <p class="order-successful-text" style="height: max-content; font-size: large;">No null values found in
-                    the table</p>
-            </div>
+
             {% else %}
             <div class="info m-3 table-responsive">
                 <div class="heading">
@@ -433,6 +430,27 @@
                     </tbody>
                 </table>
                 {% endif %}
+            </div>
+
+
+
+
+            <div class="heading">
+                <p class="heading-title-text"> Your Visulizations History </p>
+            </div>
+
+            <div class="row">
+                {% for plot in plots %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="data:image/png;base64,{{ plot.data.plot_image }}" class="card-img-top"
+                            alt="{{ plot.df_name }}" style="max-height: 45vh;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ plot.df_name }}</h5>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
 
         </main>
