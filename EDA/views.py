@@ -190,3 +190,13 @@ def DeleteNote(request,id):
     note.delete()
     messages.success(request, "Your Insight Deleted succesfully!!!")
     return redirect("data-analysis",id=newid)
+
+
+
+# @login_required(login_url='login')
+# def scatter_plot(request, dataset_id):
+#     dataset = Dataset.objects.get(pk=dataset_id)
+#     df = pd.read_csv(dataset.uploaded_file.path)
+#     data = df[['Years of Experience', 'Salary']].to_dict(orient='records')
+
+#     return render(request, 'scatter_plot.html', {'data': data})

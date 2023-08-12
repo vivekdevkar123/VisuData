@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'users',
     'EDA',
     'mainapp',
+    'Visulization',
 ]
 
 MIDDLEWARE = [

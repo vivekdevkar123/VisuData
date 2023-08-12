@@ -8,6 +8,7 @@ urlpatterns = [
     path('',include('mainapp.urls')),
     path("users/", include("users.urls")),
     path('data/',include('EDA.urls')),
+    path('visu/',include('Visulization.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
