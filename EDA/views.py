@@ -257,4 +257,5 @@ def generate_analysis_report(request, id):
             story.append(img)
 
     doc.build(story)
+    
     return response
