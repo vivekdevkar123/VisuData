@@ -1,160 +1,243 @@
 {% load static %}
 
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
 
 <style>
+    /* Google Fonts - Poppins */
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
     * {
-        margin: 0;
-        padding: 0;
         box-sizing: border-box;
-        font-family: 'roboto', sans-serif;
+        font-family: "Poppins", sans-serif;
     }
 
-    .navbar {
+    .nav {
         position: sticky;
         top: 0;
         left: 0;
         width: 100%;
-        background-color: #FFDEE9;
-        background-image: linear-gradient(0deg, #8e9eab 0%, #eef2f3 100%);
+        padding: 15px 200px;
+        background: #2980b9;
+        background: -webkit-linear-gradient(to right, #2c3e50, #2980b9);
+        background: linear-gradient(to right, #2c3e50, #2980b9);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         z-index: 9;
     }
 
-    .nav {
-        padding: 10px 10vw;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .brand-logo {
-        height: 60px;
-    }
-
-    .nav-items {
+    .nav,
+    .nav .nav-links {
         display: flex;
         align-items: center;
     }
 
-    .search {
-        width: 500px;
-        display: flex;
+    .nav {
+        justify-content: space-between;
     }
 
-    .search-box {
-        width: 80%;
-        height: 40px;
-        padding: 10px;
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-        border: 1px solid #fff;
-        text-transform: capitalize;
-        background: none;
-        color: black;
-        outline: none;
+    a {
+        color: #fff;
+        text-decoration: none;
     }
 
-    .search-btn {
-        width: 20%;
-        height: 40px;
-        padding: 10px 20px;
+    .nav .logo {
+        font-size: 22px;
+        font-weight: 500;
+    }
+
+    .nav .nav-links {
+        column-gap: 20px;
+        list-style: none;
+        margin-top: 10px;
+    }
+
+    .nav .nav-links a {
+        transition: all 0.2s linear;
+    }
+
+    .nav.openSearch .nav-links a {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .nav .search-icon {
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .nav .search-box {
+        position: absolute;
+        right: 250px;
+        height: 45px;
+        max-width: 555px;
+        width: 100%;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.2s linear;
+    }
+
+    .nav.openSearch .search-box {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .search-box .search-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        left: 15px;
+        color: #4a98f7;
+        transform: translateY(-50%);
+    }
+
+    .search-box input {
+        height: 100%;
+        width: 100%;
         border: none;
         outline: none;
-        cursor: pointer;
-        background-image: linear-gradient(0deg, #154b76 0%, #eef2f3 100%);
-
-        color: #fff;
-        text-transform: capitalize;
-        font-size: 15px;
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
+        border-radius: 6px;
+        background-color: #fff;
+        padding: 0 15px 0 45px;
     }
 
-    .search-box::placeholder {
-        color: #fff;
+    .nav .navOpenBtn,
+    .nav .navCloseBtn {
+        display: none;
     }
 
-    .nav-items a {
-        margin-left: 20px;
+    /* responsive */
+    @media screen and (max-width: 1160px) {
+        .nav {
+            padding: 15px 100px;
+        }
+
+        .nav .search-box {
+            right: 150px;
+        }
     }
 
-    .nav-items a img {
-        width: 30px;
+    @media screen and (max-width: 950px) {
+        .nav {
+            padding: 15px 50px;
+        }
+
+        .nav .search-box {
+            right: 100px;
+            max-width: 400px;
+        }
     }
 
-    .links-container {
-        width: 100%;
-        display: flex;
-        padding: 10px 10vw;
-        justify-content: center;
-        list-style: none;
-        border-top: 1px solid #d1d1d1;
+    @media screen and (max-width: 768px) {
+
+        .nav .navOpenBtn,
+        .nav .navCloseBtn {
+            display: block;
+        }
+
+        .nav {
+            padding: 15px 20px;
+        }
+
+        .nav .nav-links {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            height: 100%;
+            max-width: 280px;
+            width: 100%;
+            padding-top: 100px;
+            row-gap: 30px;
+            flex-direction: column;
+            background-color: #11101d;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            z-index: 100;
+        }
+
+        .nav.openNav .nav-links {
+            left: 0;
+        }
+
+        .nav .navOpenBtn {
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .nav .navCloseBtn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .nav .search-box {
+            top: calc(100% + 10px);
+            max-width: calc(100% - 20px);
+            right: 50%;
+            transform: translateX(50%);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
     }
 
-    .link {
-        text-transform: capitalize;
-        padding: 0 10px;
-        margin: 0 5px;
-        text-decoration: none;
-        color: #ffff;
-        opacity: 0.5;
-        transition: .5s;
-        font-weight: bolder;
-    }
-
-    .link:hover {
-        opacity: 1;
+    .nav-links li:hover {
         color: black;
-    }
-
-    .search-btn:hover {
-        background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
     }
 </style>
 
-
-
-<nav class="navbar">
-    <div class="nav" style="display: flex; margin: auto;">
-        <div class="logo mx-3" style="float: left;">
-            <img src="{% static 'logo.png' %}" class="brand-logo" alt="">
-        </div>
-
-        <div class="nav-items" style="float: right;">
-
-
-            <form role="search" method="get" action="/search">
-                <div class="search">
-                    <input type="search" class="search-box" placeholder="search brand, product" aria-label="Search"
-                        name="query" id="query">
-                    <button class="search-btn" type="submit">search</button>
-                </div>
-            </form>
-
-
-            {% if user.is_authenticated %}
-
-            <a href="/profile"><img src="{% static 'img/user.png' %}" alt=""></a>
-
-            {% else %}
-
-            <li class="link-item"><a href="/users/signup" class="link"
-                    style="font-size: medium; font-weight: bold;">Sign Up</a></li>
-            <li class="link-item"><a href="/users/login" class="link"
-                    style="font-size: medium; font-weight: bolder;">Log In</a></li>
-
-            {% endif %}
-
-        </div>
-    </div>
-
-    <ul class="links-container">
-        <li class="link-item"><a href="/" class="link">Home</a></li>
-        <li class="link-item"><a href="/about" class="link">About Us</a></li>
-        <li class="link-item"><a href="/contact" class="link">Contact Us</a></li>
+<nav class="nav">
+    <i class="uil uil-bars navOpenBtn"></i>
+    <h1 class="logo" style="color: #fff; font-size: 2rem; font-weight: bold;">VisuData</h1>
+    <ul class="nav-links">
+        <i class="uil uil-times navCloseBtn"></i>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/contact">Contact Us</a></li>
 
         {% if user.is_authenticated %}
-        <li class="link-item"><a href="/data/uploadfile" class="link">Upload Dataset</a></li>
-        <li class="link-item"><a href="/data/history" class="link">My Dataset</a></li>
-        <li class="link-item"><a href="/users/logout" class="link">Log Out</a></li>
+        <li><a href="/data/uploadfile">Upload Dataset</a></li>
+        <li><a href="/data/history">My Dataset</a></li>
+        <li><a href="/users/logout">Log Out</a></li>
+
+        {% else %}
+
+        <li><a href="/users/signup">Sign Up</a></li>
+        <li><a href="/users/login">Log In</a></li>
+
         {% endif %}
+
     </ul>
+
+    <i class="uil uil-search search-icon" id="searchIcon"></i>
+    <div class="search-box">
+        <i class="uil uil-search search-icon"></i>
+        <input type="text" placeholder="Search here..." />
+    </div>
 </nav>
+
+<script>
+    const nav = document.querySelector(".nav"),
+        searchIcon = document.querySelector("#searchIcon"),
+        navOpenBtn = document.querySelector(".navOpenBtn"),
+        navCloseBtn = document.querySelector(".navCloseBtn");
+
+    searchIcon.addEventListener("click", () => {
+        nav.classList.toggle("openSearch");
+        nav.classList.remove("openNav");
+        if (nav.classList.contains("openSearch")) {
+            return searchIcon.classList.replace("uil-search", "uil-times");
+        }
+        searchIcon.classList.replace("uil-times", "uil-search");
+    });
+
+    navOpenBtn.addEventListener("click", () => {
+        nav.classList.add("openNav");
+        nav.classList.remove("openSearch");
+        searchIcon.classList.replace("uil-times", "uil-search");
+    });
+    navCloseBtn.addEventListener("click", () => {
+        nav.classList.remove("openNav");
+    });
+</script>
