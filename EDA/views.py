@@ -64,7 +64,7 @@ def Delete_Record(request,id):
 def Analysis(request, id):
     dataset = Dataset.objects.get(dataset_id=id)
     plots = Plot.objects.filter(dataset=dataset)
-    df = pd.read_csv(dataset.uploaded_file)
+    df = pd.read_csv(dataset.uploaded_file, index_col=0)
     notes = Note.objects.filter(user = request.user,dataset = dataset)
     row, col = df.shape
     head = df.head()
@@ -76,7 +76,7 @@ def Analysis(request, id):
     Nullval = pd.DataFrame({'Column': df.columns, 'Null Count': df.isnull().sum()})
     Nullval = Nullval[Nullval['Null Count'] > 0]
     desc = df.describe().reset_index()
-
+    
     context = {
         'head': head,
         'info': info,

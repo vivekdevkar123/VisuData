@@ -7,6 +7,7 @@ from io import BytesIO, StringIO
 import base64
 from .models import Plot
 from django.contrib import messages
+import seaborn as sns
 
 
 def Visulization_Home(request, id):
@@ -68,10 +69,6 @@ def scatter_plot(request, id):
     }
     return render(request, 'visulization/index.html', context)
 
-
-
-
-import seaborn as sns
 
 def line_plot(request, id):
     dataset = Dataset.objects.get(dataset_id=id)
@@ -197,40 +194,6 @@ def histogram(request, id):
 
 
 
-def pie_chart(request, id):
-    dataset = Dataset.objects.get(dataset_id=id)
-    df = pd.read_csv(dataset.uploaded_file.path)
-    numeric_columns = df.select_dtypes(include=['number']).columns.tolist()
-    
-    if request.method == 'POST':
-        heading = request.POST.get('pie-chart-heading')
-        
-        plt.figure(figsize=(8, 8))
-        
-        # Sum the numeric columns and create a pie chart
-        plt.pie(df[numeric_columns].sum(), labels=numeric_columns, autopct='%1.1f%%', startangle=140)
-        plt.title(heading)
-
-        buffer = BytesIO()
-        plt.savefig(buffer, format='png')
-        plt.close()
-
-        plot_image = base64.b64encode(buffer.getvalue()).decode('utf-8')
-
-        # Save the plot_image to the session to pass it to the home view
-        request.session['plot_image'] = plot_image
-
-        return redirect('Visulization-Home', id=id)
-
-    context = {
-        'title': dataset.dataset_name,
-        'my_id': dataset.dataset_id,
-    }
-    return render(request, 'visulization/index.html', context)
-
-
-
-
 
 
 def Save_Plot(request, id):
@@ -249,3 +212,11 @@ def Delete_Plot(request, id):
     del request.session['plot_image']
     messages.warning(request, "Plot deleted successfully!!!")
     return redirect('Visulization-Home', id=id)
+
+
+def Delete_Plot_Img(request, id):
+    img = Plot.objects.get(plot_id = id)
+    img.delete()
+    messages.warning(request, "Plot deleted successfully!!!")
+    id = img.dataset.dataset_id
+    return redirect('data-analysis', id=id)
