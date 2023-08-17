@@ -11,4 +11,5 @@ urlpatterns = [
     path('download/<slug:id>',DownloadDataset,name='DownloadDataset'),
     path('addnote/<slug:id>',AddNote,name='Add-note'),
     path('note/delete/<slug:id>',DeleteNote,name='Delete-note'),
+    path('generate_analysis_report/<slug:id>/', generate_analysis_report, name='generate-analysis-report'),
 ]

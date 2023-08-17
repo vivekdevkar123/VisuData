@@ -197,7 +197,6 @@
                         <div class="dropdown-menu" aria-labelledby="subLevelDropdown">
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#BarChart">Bar Chart</a>
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Histogram">Histogram</a>
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#PieChart">Pie Chart</a>
                         </div>
                     </li>
 
@@ -263,35 +262,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-        <div class="modal fade" id="PieChart" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Pie Chart</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="/visu/pie/{{ my_id }}" method="post">
-                        {% csrf_token %}
-                        <div class="modal-body">
-                            <input type="text" name="pie-chart-heading" class="form-control my-2"
-                                placeholder="Enter the heading here...">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success">Show Plot</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
 
 
         <div class="modal fade" id="LinePlot" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
