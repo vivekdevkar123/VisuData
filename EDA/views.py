@@ -184,9 +184,14 @@ def AddNote(request,id):
         dataset = Dataset.objects.get(dataset_id=id)
         note = request.POST.get('insight')
         heading = request.POST.get('heading')
-        note = Note(user=request.user,dataset=dataset,note = note,heading=heading)
-        note.save()    
-        messages.success(request, "Your Insight Added succesfully!!!")
+        if(len(heading) < 1):
+            messages.warning(request, "Write some heading")
+        elif(len(note) < 1):
+            messages.warning(request, "Your insight is empty")
+        else:
+            note = Note(user=request.user,dataset=dataset,note = note,heading=heading)
+            note.save()    
+            messages.success(request, "Your Insight Added succesfully!!!")
         return redirect("data-analysis",id=id)
 
     return redirect("data-analysis",id=id)
@@ -198,7 +203,7 @@ def DeleteNote(request,id):
     dataset = note.dataset
     newid = dataset.dataset_id
     note.delete()
-    messages.success(request, "Your Insight Deleted succesfully!!!")
+    messages.warning(request, "Your Insight Deleted succesfully!!!")
     return redirect("data-analysis",id=newid)
 
 
