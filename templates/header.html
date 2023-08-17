@@ -14,7 +14,8 @@
         top: 0;
         left: 0;
         width: 100%;
-        background: #edfffa;
+        background-color: #FFDEE9;
+        background-image: linear-gradient(0deg, #8e9eab 0%, #eef2f3 100%);
         z-index: 9;
     }
 
@@ -44,10 +45,10 @@
         padding: 10px;
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
-        border: 1px solid #d1d1d1;
+        border: 1px solid #fff;
         text-transform: capitalize;
         background: none;
-        color: #a9a9a9;
+        color: black;
         outline: none;
     }
 
@@ -58,7 +59,8 @@
         border: none;
         outline: none;
         cursor: pointer;
-        background: #383838;
+        background-image: linear-gradient(0deg, #154b76 0%, #eef2f3 100%);
+
         color: #fff;
         text-transform: capitalize;
         font-size: 15px;
@@ -67,7 +69,7 @@
     }
 
     .search-box::placeholder {
-        color: #a9a9a9;
+        color: #fff;
     }
 
     .nav-items a {
@@ -92,13 +94,19 @@
         padding: 0 10px;
         margin: 0 5px;
         text-decoration: none;
-        color: #383838;
+        color: #ffff;
         opacity: 0.5;
         transition: .5s;
+        font-weight: bolder;
     }
 
     .link:hover {
         opacity: 1;
+        color: black;
+    }
+
+    .search-btn:hover {
+        background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
     }
 </style>
 
@@ -142,10 +150,10 @@
         <li class="link-item"><a href="/" class="link">Home</a></li>
         <li class="link-item"><a href="/about" class="link">About Us</a></li>
         <li class="link-item"><a href="/contact" class="link">Contact Us</a></li>
-        <li class="link-item"><a href="/data/uploadfile" class="link">Upload Dataset</a></li>
-        <li class="link-item"><a href="/data/history" class="link">EDA History</a></li>
 
         {% if user.is_authenticated %}
+        <li class="link-item"><a href="/data/uploadfile" class="link">Upload Dataset</a></li>
+        <li class="link-item"><a href="/data/history" class="link">My Dataset</a></li>
         <li class="link-item"><a href="/users/logout" class="link">Log Out</a></li>
         {% endif %}
     </ul>

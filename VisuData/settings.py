@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'EDA',
+    'mainapp',
+    'Visulization',
 ]
 
 MIDDLEWARE = [

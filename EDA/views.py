@@ -6,6 +6,14 @@ import pandas as pd
 import os
 from django.conf import settings
 from django.contrib import messages
+from Visulization.models import Plot
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter, landscape
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, Table, TableStyle
+from reportlab.lib.styles import getSampleStyleSheet
+from io import BytesIO
+import base64
+import json
 
 # Create your views here.
 
@@ -55,7 +63,8 @@ def Delete_Record(request,id):
 @login_required(login_url='login')
 def Analysis(request, id):
     dataset = Dataset.objects.get(dataset_id=id)
-    df = pd.read_csv(dataset.uploaded_file)
+    plots = Plot.objects.filter(dataset=dataset)
+    df = pd.read_csv(dataset.uploaded_file, index_col=0)
     notes = Note.objects.filter(user = request.user,dataset = dataset)
     row, col = df.shape
     head = df.head()
@@ -67,7 +76,7 @@ def Analysis(request, id):
     Nullval = pd.DataFrame({'Column': df.columns, 'Null Count': df.isnull().sum()})
     Nullval = Nullval[Nullval['Null Count'] > 0]
     desc = df.describe().reset_index()
-
+    
     context = {
         'head': head,
         'info': info,
@@ -76,6 +85,7 @@ def Analysis(request, id):
         'my_id':id,
         'title':dataset.dataset_name,
         'notes':notes,
+        'plots':plots,
     }
     return render(request, 'analysis/dataAnalysis.html', context)
 
@@ -174,9 +184,14 @@ def AddNote(request,id):
         dataset = Dataset.objects.get(dataset_id=id)
         note = request.POST.get('insight')
         heading = request.POST.get('heading')
-        note = Note(user=request.user,dataset=dataset,note = note,heading=heading)
-        note.save()    
-        messages.success(request, "Your Insight Added succesfully!!!")
+        if(len(heading) < 1):
+            messages.warning(request, "Write some heading")
+        elif(len(note) < 1):
+            messages.warning(request, "Your insight is empty")
+        else:
+            note = Note(user=request.user,dataset=dataset,note = note,heading=heading)
+            note.save()    
+            messages.success(request, "Your Insight Added succesfully!!!")
         return redirect("data-analysis",id=id)
 
     return redirect("data-analysis",id=id)
@@ -188,5 +203,64 @@ def DeleteNote(request,id):
     dataset = note.dataset
     newid = dataset.dataset_id
     note.delete()
-    messages.success(request, "Your Insight Deleted succesfully!!!")
+    messages.warning(request, "Your Insight Deleted succesfully!!!")
     return redirect("data-analysis",id=newid)
+
+
+
+
+def generate_analysis_report(request, id):
+    dataset = Dataset.objects.get(dataset_id=id)
+    plots = Plot.objects.filter(dataset=dataset)
+    df = pd.read_csv(dataset.uploaded_file.path)
+    notes = Note.objects.filter(user=request.user, dataset=dataset)
+    row, col = df.shape
+    head = df.head()
+    info = pd.DataFrame({
+        'Column': df.columns,
+        'Non-Null Count': df.count(),
+        'Data Type': df.dtypes
+    })
+    Nullval = pd.DataFrame({'Column': df.columns, 'Null Count': df.isnull().sum()})
+    Nullval = Nullval[Nullval['Null Count'] > 0]
+    desc = df.describe().reset_index()
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="analysis_report.pdf"'
+
+    doc = SimpleDocTemplate(response, pagesize=landscape(letter))
+    story = []
+
+    # Title
+    styles = getSampleStyleSheet()
+    story.append(Paragraph("Analysis Report", styles['Title']))
+
+    # Add dataset title
+    story.append(Paragraph(dataset.dataset_name, styles['Heading1']))
+
+    # Add data summary tables
+    head_table = Table(head.values.tolist())
+    info_table = Table(info.values.tolist())
+    desc_table = Table(desc.values.tolist())
+    story.append(head_table)
+    story.append(info_table)
+    story.append(desc_table)
+
+    # Add notes
+    story.append(Paragraph("Notes:", styles['Heading2']))
+    for note in notes:
+        story.append(Paragraph(note.note, styles['Normal']))
+
+    # Add plots
+    story.append(Paragraph("Plots:", styles['Heading2']))
+    for plot in plots:
+        img_data = plot.data.get('plot_image', None)
+        if img_data:
+            img = Image(BytesIO(base64.b64decode(img_data)))
+            img.drawHeight = 300
+            img.drawWidth = 500
+            story.append(img)
+
+    doc.build(story)
+    
+    return response
