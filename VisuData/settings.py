@@ -24,9 +24,9 @@ SECRET_KEY = 'django-insecure-6yj$)_7a1*qsr79!j6$@x7l29*qe)$o=9dnu)0pk0^44bm1z%+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
-TEMPLATE_DEBUG = True
-TEMPLATE_STRING_IF_INVALID = "[Invalid Template]"
+DEBUG = True
+# TEMPLATE_DEBUG = True
+# TEMPLATE_STRING_IF_INVALID = "[Invalid Template]"
 
 ALLOWED_HOSTS = ['*']
 
