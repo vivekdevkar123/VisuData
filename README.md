@@ -1,4 +1,4 @@
-
+![sc4](https://github.com/user-attachments/assets/357dc9df-967c-40a0-bfd2-adf7c13c5c71)
 <!-- ![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png) -->
 
 
@@ -72,7 +72,11 @@ Go to the below address to access the website.
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![sc1](https://github.com/user-attachments/assets/55860bf8-3f12-4f0e-a546-a14fb8492dbf)
+![sc2](https://github.com/user-attachments/assets/cb9566c8-4f42-4c6b-b3df-f281046143f2)
+![sc3](https://github.com/user-attachments/assets/d68520dd-6014-47e8-919c-c397b0bcc3fe)
+![sc4](https://github.com/user-attachments/assets/01ab6585-8758-4a02-91cc-a54c6bb4d75f)
+![sc5](https://github.com/user-attachments/assets/78a5d63a-d462-4ba3-a530-f86c956e4363)
 
 
 ## 🔗 Links
