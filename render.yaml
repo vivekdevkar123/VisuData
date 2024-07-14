@@ -1,10 +1,8 @@
 services:
   - type: web
-    name: VisuData
+    name: visu-data
     env: python
     plan: free
-    buildCommand: 
-      - pip install -r requirements.txt
-      - python manage.py collectstatic --noinput
+    buildCommand: pip install -r requirements.txt && echo yes | python manage.py collectstatic --noinput
     startCommand: gunicorn VisuData.wsgi
     staticPublishPath: staticfiles
