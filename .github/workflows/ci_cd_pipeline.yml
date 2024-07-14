@@ -22,22 +22,6 @@ jobs:
         run: |
           python manage.py migrate
 
-      # - name: Run Django tests
-      #   run: |
-      #     python manage.py test
-
-      # - name: Build and collect static files
-      #   run: |
-      #     python manage.py collectstatic --noinput
-
-      - name: Build and Run Django with Docker
-        run: |
-          # Build the Docker image with the provided Dockerfile
-          docker build -t app .
-
-          # Run the Django application using docker-compose
-          docker-compose up -d
-
       - name: Display Job Status
         run: |
           echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
