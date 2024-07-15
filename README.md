@@ -1,7 +1,3 @@
-![sc4](https://github.com/user-attachments/assets/357dc9df-967c-40a0-bfd2-adf7c13c5c71)
-<!-- ![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png) -->
-
-
 # Dynamic Data Visualization Platform using Django
 
 The goal of this project is to build a web application that allows users to visualize and interact with large datasets in real-time. The application will utilize Django as the backend framework, focusing on providing users with an intuitive and dynamic interface to explore, analyze, and manipulate data visually.
