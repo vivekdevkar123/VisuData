@@ -20,6 +20,24 @@
     .heading {
         margin-top: 30px;
     }
+
+    .view-delete-buttons{
+        display: flex;
+        margin: auto;
+    }
+    .delete-button{
+        margin-left: 10px;
+        width: max-content;
+    }
+    .view-button{
+        width: max-content;
+    }
+
+    @media (max-width: 770px) {
+        .view-delete-buttons{
+            margin-left: 10px;
+        }
+    }
 </style>
 
 {%endblock%}
@@ -43,20 +61,18 @@
             </div>
 
             <div class="col-md-4 d-flex my-4">
+                <div class="view-delete-buttons">
+                    <div>
+    
+                        <a href="/data/{{data.dataset_id}}"><button type="button" class="btn btn-outline-success view-button">View Details</button></a>
+                    </div>
+    
+                    <div>
+                        <button type="button" class="btn btn-outline-danger delete-button" data-toggle="modal" data-target="#exampleModal">Delete</button>
+    
+                    </div>
 
-                <a href="/data/{{data.dataset_id}}"><button type="button" class="btn btn-outline-success"
-                        style="width: 9vw; height: max-content;">View Details</button></a>
-
-                <button type="button" class="btn btn-outline-danger"
-                    style="width: 9vw; margin-left: 10px; margin-right: 30px; height: max-content;" data-toggle="modal"
-                    data-target="#exampleModal">Delete</button>
-
-
-
-                <!-- Button trigger modal -->
-                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Launch demo modal
-                </button> -->
+                </div>
 
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
